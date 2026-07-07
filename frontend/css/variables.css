@@ -1,0 +1,82 @@
+/* ============================================
+   DESIGN TOKENS — Reputation Management Dashboard
+   ============================================ */
+
+:root {
+  /* ── Backgrounds ── */
+  --bg: #0d0f12;
+  --surface: #141619;
+  --surface2: #1c1f24;
+  --border: #26292f;
+
+  /* ── Primary Accent (Green) ── */
+  --accent: #00e5a0;
+  --accent-dim: rgba(0, 229, 160, 0.08);
+  --accent-border: rgba(0, 229, 160, 0.2);
+  --accent-glow: rgba(0, 229, 160, 0.15);
+
+  /* ── Intent Colors ── */
+  --lead: #3ecfff;
+  --lead-dim: rgba(62, 207, 255, 0.08);
+  --lead-border: rgba(62, 207, 255, 0.25);
+
+  --warn: #f5a623;
+  --warn-dim: rgba(245, 166, 35, 0.08);
+  --warn-border: rgba(245, 166, 35, 0.25);
+
+  --danger: #ff4f6a;
+  --danger-dim: rgba(255, 79, 106, 0.08);
+  --danger-border: rgba(255, 79, 106, 0.25);
+
+  --spam: #6b7280;
+  --spam-dim: rgba(107, 114, 128, 0.08);
+  --spam-border: rgba(107, 114, 128, 0.25);
+
+  /* ── Platform Colors ── */
+  --fb-blue: #1877f2;
+  --fb-dim: rgba(24, 119, 242, 0.1);
+  --ig-pink: #e1306c;
+  --ig-dim: rgba(225, 48, 108, 0.1);
+
+  /* ── Text ── */
+  --text: #e8eaed;
+  --text-dim: #9ca3af;
+  --text-muted: #6b7280;
+
+  /* ── Typography ── */
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  /* ── Spacing ── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+
+  /* ── Radii ── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-pill: 100px;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px var(--accent-glow);
+
+  /* ── Transitions ── */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* ── Layout ── */
+  --sidebar-width: 220px;
+  --topbar-height: 0px;
+  --message-list-width: 340px;
+}

@@ -1,0 +1,263 @@
+/* ============================================
+   ACTIVITY LOGS PAGE — Table, Filters
+   ============================================ */
+
+/* ── Page Layout ── */
+.activity-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 32px 40px;
+    overflow-y: auto;
+}
+
+.activity-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-shrink: 0;
+}
+
+.activity-header__left h2 {
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+
+.activity-header__count {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* ── Filters Bar ── */
+.activity-filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+.filter-select {
+    padding: 9px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text);
+    font-size: 13px;
+    font-family: var(--font-body);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+    min-width: 160px;
+    transition: border-color var(--transition-fast);
+}
+
+.filter-select:focus {
+    border-color: var(--accent);
+}
+
+.btn--clear-filters {
+    padding: 9px 16px;
+    font-size: 12px;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn--clear-filters:hover {
+    background: var(--surface2);
+    color: var(--text);
+}
+
+/* ── Activity Table ── */
+.activity-table-wrap {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+}
+
+.activity-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.activity-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.activity-table th {
+    background: var(--surface2);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--text-muted);
+    padding: 14px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+.activity-table td {
+    padding: 14px 20px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+}
+
+.activity-table tbody tr {
+    transition: background var(--transition-fast);
+}
+
+.activity-table tbody tr:hover {
+    background: var(--surface2);
+}
+
+.activity-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Action badges */
+.action-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+.action-badge--login {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid var(--accent-border);
+}
+
+.action-badge--approve_message {
+    background: var(--lead-dim);
+    color: var(--lead);
+    border: 1px solid var(--lead-border);
+}
+
+.action-badge--reject_message {
+    background: var(--danger-dim);
+    color: var(--danger);
+    border: 1px solid var(--danger-border);
+}
+
+.action-badge--regenerate_draft {
+    background: var(--warn-dim);
+    color: var(--warn);
+    border: 1px solid var(--warn-border);
+}
+
+.action-badge--create_user {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid var(--accent-border);
+}
+
+.action-badge--delete_user {
+    background: var(--danger-dim);
+    color: var(--danger);
+    border: 1px solid var(--danger-border);
+}
+
+.activity-user {
+    font-weight: 500;
+    color: var(--text);
+}
+
+.activity-details {
+    color: var(--text-dim);
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.activity-time {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    white-space: nowrap;
+}
+
+/* ── Pagination ── */
+.activity-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 0;
+    flex-shrink: 0;
+}
+
+.page-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.page-btn:hover:not(:disabled) {
+    background: var(--surface2);
+    color: var(--text);
+    border-color: var(--accent-border);
+}
+
+.page-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.page-btn.active {
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-color: var(--accent-border);
+}
+
+.page-info {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 0 8px;
+}
+
+/* ── Empty State ── */
+.activity-empty {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.activity-empty__icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+    opacity: 0.5;
+}
+
+.activity-empty__text {
+    font-size: 14px;
+    color: var(--text-muted);
+}

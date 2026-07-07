@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reputation Manager — Auxilo Finserve</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background: #0d0f12;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'DM Mono', monospace;
+            color: #6b7280;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>Redirecting…</div>
+    <script>
+        // Check auth token and validate expiry before redirecting
+        (function () {
+            const token = localStorage.getItem('auth_token');
+
+            if (token) {
+                try {
+                    // Decode JWT payload (base64url) to check expiry
+                    const payloadBase64 = token.split('.')[1];
+                    const payload = JSON.parse(atob(payloadBase64));
+                    const now = Math.floor(Date.now() / 1000);
+
+                    if (payload.exp && payload.exp > now) {
+                        // Token is valid and not expired
+                        window.location.replace('inbox.html');
+                        return;
+                    }
+                } catch (e) {
+                    // Token is malformed — clear it
+                    console.warn('Invalid auth token, clearing.');
+                }
+                // Token expired or invalid — remove and go to login
+                localStorage.removeItem('auth_token');
+            }
+
+            window.location.replace('login.html');
+        })();
+    </script>
+</body>
+
+</html>

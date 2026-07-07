@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Logs — Reputation Manager</title>
+
+    <!-- Fonts (non-blocking) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/activity.css">
+</head>
+
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="app-layout">
+
+        <!-- ═══ Sidebar ═══ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar__logo">
+                <div class="sidebar__brand">REPUTATION MGR</div>
+                <div class="sidebar__company">AUXILO FINSERVE</div>
+            </div>
+
+            <nav class="sidebar__nav">
+                <a href="inbox.html" class="nav-item" id="navInbox">
+                    <span class="nav-item__icon">📥</span>
+                    <span class="nav-item__label">Inbox</span>
+                    <span class="nav-item__badge" id="pendingBadge" style="display:none;">0</span>
+                </a>
+                <a href="autosent.html" class="nav-item" id="navAutosent">
+                    <span class="nav-item__icon">📤</span>
+                    <span class="nav-item__label">Auto-sent Log</span>
+                </a>
+                <a href="users.html" class="nav-item" id="navUsers" style="display:none;">
+                    <span class="nav-item__icon">👥</span>
+                    <span class="nav-item__label">Manage Users</span>
+                </a>
+                <a href="activity.html" class="nav-item active" id="navActivity" style="display:none;">
+                    <span class="nav-item__icon">📋</span>
+                    <span class="nav-item__label">Activity Logs</span>
+                </a>
+                <a href="knowledge.html" class="nav-item" id="navKnowledge">
+                    <span class="nav-item__icon">🧠</span>
+                    <span class="nav-item__label">Knowledge Base</span>
+                </a>
+            </nav>
+
+            <div class="sidebar__admin">
+                <div class="admin-chip">
+                    <div class="admin-chip__avatar">A</div>
+                    <div class="admin-chip__info">
+                        <div class="admin-chip__email" id="adminEmail">loading…</div>
+                        <div class="admin-chip__role" id="adminRole">Super Admin</div>
+                    </div>
+                    <button class="admin-chip__logout" id="logoutBtn" title="Logout">⏻</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ═══ Main Content ═══ -->
+        <main class="main-content">
+            <div class="activity-page">
+                <div class="activity-header">
+                    <div class="activity-header__left">
+                        <h2>Activity Logs</h2>
+                        <div class="activity-header__count" id="logCount">Loading…</div>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="activity-filters">
+                    <select class="filter-select" id="filterUser">
+                        <option value="">All Users</option>
+                    </select>
+                    <select class="filter-select" id="filterAction">
+                        <option value="">All Actions</option>
+                    </select>
+                    <button class="btn--clear-filters" id="clearFiltersBtn">✕ Clear</button>
+                </div>
+
+                <!-- Table -->
+                <div class="activity-table-wrap">
+                    <table class="activity-table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Details</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="activityTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="activity-pagination" id="pagination">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/activity.js"></script>
+</body>
+
+</html>

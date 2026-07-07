@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Reputation Manager</title>
+  <meta name="description" content="Sign in to the Auxilo Finserve Reputation Management Dashboard">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <main class="login-page">
+    <!-- Logo -->
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="login-logo__brand">AUXILO</div>
+        <div class="login-logo__sub">Reputation Manager</div>
+      </div>
+
+      <!-- Heading -->
+      <div class="login-heading">
+        <h1>Welcome back</h1>
+        <p>Sign in to your admin dashboard</p>
+      </div>
+
+      <!-- Form -->
+      <form class="login-form" id="loginForm" autocomplete="off">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <div class="form-input-wrapper">
+            <input type="email" id="email" class="form-input" placeholder="superadmin@auxilo.com" required
+              autocomplete="email">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="form-input-wrapper">
+            <input type="password" id="password" class="form-input" placeholder="Enter your password" required
+              autocomplete="current-password">
+            <button type="button" class="password-toggle" id="passwordToggle" aria-label="Toggle password visibility">
+              👁
+            </button>
+          </div>
+        </div>
+
+        <!-- Error -->
+        <div class="login-error" id="loginError"></div>
+
+        <!-- Submit -->
+        <button type="submit" class="login-btn" id="loginBtn">
+          <span class="btn-text">Sign In</span>
+          <span class="spinner"></span>
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+
+</html>

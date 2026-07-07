@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox — Reputation Manager</title>
+    <meta name="description" content="Review and approve AI-drafted replies to social media messages">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/inbox.css">
+</head>
+
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        <span style="font-family:var(--font-heading);font-weight:700;color:var(--accent);font-size:14px;">REPUTATION
+            MGR</span>
+    </div>
+
+    <!-- Sidebar Overlay (mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="app-layout">
+        <!-- ═══ Sidebar ═══ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar__logo">
+                <div class="sidebar__brand">REPUTATION MGR</div>
+                <div class="sidebar__company">AUXILO FINSERVE</div>
+            </div>
+
+            <nav class="sidebar__nav">
+                <a href="inbox.html" class="nav-item active" id="navInbox">
+                    <span class="nav-item__icon">📥</span>
+                    <span class="nav-item__label">Inbox</span>
+                    <span class="nav-item__badge" id="pendingBadge" style="display:none;">0</span>
+                </a>
+                <a href="autosent.html" class="nav-item" id="navAutosent">
+                    <span class="nav-item__icon">📤</span>
+                    <span class="nav-item__label">Auto-sent Log</span>
+                </a>
+                <a href="users.html" class="nav-item" id="navUsers" style="display:none;">
+                    <span class="nav-item__icon">👥</span>
+                    <span class="nav-item__label">Manage Users</span>
+                </a>
+                <a href="activity.html" class="nav-item" id="navActivity" style="display:none;">
+                    <span class="nav-item__icon">📋</span>
+                    <span class="nav-item__label">Activity Logs</span>
+                </a>
+                <a href="knowledge.html" class="nav-item" id="navKnowledge">
+                    <span class="nav-item__icon">🧠</span>
+                    <span class="nav-item__label">Knowledge Base</span>
+                </a>
+            </nav>
+
+            <div class="sidebar__admin">
+                <div class="admin-chip">
+                    <div class="admin-chip__avatar">A</div>
+                    <div class="admin-chip__info">
+                        <div class="admin-chip__email" id="adminEmail">loading…</div>
+                        <div class="admin-chip__role" id="adminRole">Super Admin</div>
+                    </div>
+                    <button class="admin-chip__logout" id="logoutBtn" title="Logout">⏻</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ═══ Main Content ═══ -->
+        <main class="main-content">
+            <div class="inbox-layout">
+
+                <!-- ─── Left Panel: Message List ─── -->
+                <div class="message-list-panel" id="messageListPanel">
+                    <div class="message-list__header">
+                        <div class="message-list__top-row">
+                            <h2 class="message-list__title">Inbox</h2>
+                        </div>
+                        <div class="message-list__count" id="messageCount">Loading…</div>
+                        <div class="message-list__filters">
+                            <select class="filter-select" id="filterPlatform">
+                                <option value="">All Platforms</option>
+                                <option value="facebook">Facebook</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="google_reviews">Google Reviews</option>
+                            </select>
+                            <select class="filter-select" id="filterIntent">
+                                <option value="">All Intents</option>
+                                <option value="potential_lead">Lead</option>
+                                <option value="customer_support">Support</option>
+                                <option value="general_inquiry">General</option>
+                                <option value="sensitive_complaint">Sensitive</option>
+                                <option value="partnership_inquiry">Partnership</option>
+                                <option value="spam">Spam</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="message-list__scroll" id="messageList">
+                        <!-- Skeleton loading state -->
+                        <div id="skeletonCards">
+                            <div class="skeleton-card">
+                                <div class="skeleton-line skeleton-line--short skeleton"></div>
+                                <div class="skeleton-badge skeleton"></div>
+                                <div class="skeleton-line skeleton-line--long skeleton"></div>
+                                <div class="skeleton-line skeleton-line--medium skeleton"></div>
+                            </div>
+                            <div class="skeleton-card">
+                                <div class="skeleton-line skeleton-line--short skeleton"></div>
+                                <div class="skeleton-badge skeleton"></div>
+                                <div class="skeleton-line skeleton-line--long skeleton"></div>
+                                <div class="skeleton-line skeleton-line--medium skeleton"></div>
+                            </div>
+                            <div class="skeleton-card">
+                                <div class="skeleton-line skeleton-line--short skeleton"></div>
+                                <div class="skeleton-badge skeleton"></div>
+                                <div class="skeleton-line skeleton-line--long skeleton"></div>
+                                <div class="skeleton-line skeleton-line--medium skeleton"></div>
+                            </div>
+                            <div class="skeleton-card">
+                                <div class="skeleton-line skeleton-line--short skeleton"></div>
+                                <div class="skeleton-badge skeleton"></div>
+                                <div class="skeleton-line skeleton-line--long skeleton"></div>
+                                <div class="skeleton-line skeleton-line--medium skeleton"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── Right Panel: Message Detail ─── -->
+                <div class="message-detail-panel" id="messageDetailPanel">
+                    <!-- Empty state — shown when nothing selected -->
+                    <div class="detail-empty empty-state" id="detailEmpty">
+                        <div class="empty-state__icon">📬</div>
+                        <div class="empty-state__title">Select a message</div>
+                        <div class="empty-state__sub">Choose a conversation from the inbox to review</div>
+                    </div>
+
+                    <!-- Detail content — hidden by default -->
+                    <div id="detailContent" style="display:none; flex-direction:column; height:100%;">
+                        <!-- Header -->
+                        <div class="detail-header">
+                            <div style="display:flex;align-items:center;">
+                                <button class="detail-header__back" id="detailBackBtn">←</button>
+                                <div class="detail-header__info">
+                                    <div class="detail-header__name" id="detailName"></div>
+                                    <div class="detail-header__meta">
+                                        <span id="detailPlatformLink"></span>
+                                        <span>•</span>
+                                        <span id="detailTimeAgo"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Scrollable body -->
+                        <div class="detail-scroll">
+                            <!-- Metadata Strip -->
+                            <div class="metadata-strip" id="metadataStrip"></div>
+
+                            <!-- Original Message -->
+                            <div>
+                                <div class="section-label">ORIGINAL MESSAGE</div>
+                                <div class="message-bubble" id="originalMessage"></div>
+                            </div>
+
+                            <!-- AI Drafted Reply -->
+                            <div class="reply-section">
+                                <div class="section-label">
+                                    <span>AI DRAFTED REPLY</span>
+                                    <div class="reply-actions-top">
+                                        <button class="regenerate-btn" id="regenerateBtn">
+                                            <span>✦</span> regenerate
+                                        </button>
+                                    </div>
+                                </div>
+                                <textarea class="reply-textarea" id="replyTextarea" readonly></textarea>
+                                <div class="reply-footer">
+                                    <span class="char-count" id="charCount">0 characters</span>
+                                    <button class="edit-reply-btn" id="editReplyBtn">
+                                        ✏️ Edit reply
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Bar -->
+                        <div class="action-bar" id="actionBar">
+                            <button class="btn btn--danger" id="rejectBtn">
+                                <span class="btn-text">✗ Reject</span>
+                                <span class="spinner"></span>
+                            </button>
+                            <button class="btn btn--primary" id="approveBtn">
+                                <span class="btn-text">✓ Approve & Send</span>
+                                <span class="spinner"></span>
+                            </button>
+                        </div>
+
+                        <!-- Reject reason (hidden) -->
+                        <div class="reject-reason" id="rejectReason">
+                            <div class="reject-reason__inner">
+                                <select id="rejectReasonSelect">
+                                    <option value="">Select reason (optional)</option>
+                                    <option value="not_relevant">Not relevant</option>
+                                    <option value="wrong_tone">Wrong tone</option>
+                                    <option value="needs_human">Needs human reply</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <button class="btn btn--danger btn--small" id="confirmRejectBtn">
+                                    <span class="btn-text">Confirm Reject</span>
+                                    <span class="spinner"></span>
+                                </button>
+                                <button class="btn btn--ghost btn--small" id="cancelRejectBtn">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/inbox.js"></script>
+</body>
+
+</html>

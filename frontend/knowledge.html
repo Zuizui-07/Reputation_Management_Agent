@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Base — Reputation Manager</title>
+    <meta name="description" content="Upload company documents and train the AI agent with company knowledge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/knowledge.css">
+</head>
+
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        <span style="font-family:var(--font-heading);font-weight:700;color:var(--accent);font-size:14px;">REPUTATION
+            MGR</span>
+    </div>
+
+    <!-- Sidebar Overlay (mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="app-layout">
+        <!-- ═══ Sidebar ═══ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar__logo">
+                <div class="sidebar__brand">REPUTATION MGR</div>
+                <div class="sidebar__company">AUXILO FINSERVE</div>
+            </div>
+
+            <nav class="sidebar__nav">
+                <a href="inbox.html" class="nav-item" id="navInbox">
+                    <span class="nav-item__icon">📥</span>
+                    <span class="nav-item__label">Inbox</span>
+                </a>
+                <a href="autosent.html" class="nav-item" id="navAutosent">
+                    <span class="nav-item__icon">📤</span>
+                    <span class="nav-item__label">Auto-sent Log</span>
+                </a>
+                <a href="users.html" class="nav-item" id="navUsers" style="display:none;">
+                    <span class="nav-item__icon">👥</span>
+                    <span class="nav-item__label">Manage Users</span>
+                </a>
+                <a href="activity.html" class="nav-item" id="navActivity" style="display:none;">
+                    <span class="nav-item__icon">📋</span>
+                    <span class="nav-item__label">Activity Logs</span>
+                </a>
+                <a href="knowledge.html" class="nav-item active" id="navKnowledge">
+                    <span class="nav-item__icon">🧠</span>
+                    <span class="nav-item__label">Knowledge Base</span>
+                </a>
+            </nav>
+
+            <div class="sidebar__admin">
+                <div class="admin-chip">
+                    <div class="admin-chip__avatar">A</div>
+                    <div class="admin-chip__info">
+                        <div class="admin-chip__email" id="adminEmail">loading…</div>
+                        <div class="admin-chip__role" id="adminRole">Super Admin</div>
+                    </div>
+                    <button class="admin-chip__logout" id="logoutBtn" title="Logout">⏻</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ═══ Main Content ═══ -->
+        <main class="main-content">
+            <div class="knowledge-container">
+
+                <!-- ─── Header ─── -->
+                <div class="kb-header">
+                    <div class="kb-header__text">
+                        <h1 class="kb-header__title">🧠 Knowledge Base</h1>
+                        <p class="kb-header__subtitle">Upload company documents to train the AI agent with accurate
+                            company knowledge</p>
+                    </div>
+                    <div class="kb-stats" id="kbStats">
+                        <div class="stat-card">
+                            <div class="stat-card__value" id="statDocs">—</div>
+                            <div class="stat-card__label">Documents</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card__value" id="statChunks">—</div>
+                            <div class="stat-card__label">Chunks</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card__value" id="statVectors">—</div>
+                            <div class="stat-card__label">Vectors</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── Upload Section ─── -->
+                <div class="kb-upload-section">
+                    <!-- PDF Upload -->
+                    <div class="upload-card">
+                        <div class="upload-card__header">
+                            <span class="upload-card__icon">📄</span>
+                            <h3 class="upload-card__title">Upload PDF Documents</h3>
+                        </div>
+                        <p class="upload-card__desc">Upload company brochures, product docs, FAQs, policies, etc.</p>
+                        <div class="drop-zone" id="dropZone">
+                            <div class="drop-zone__icon">📁</div>
+                            <div class="drop-zone__text">Drag & drop PDF files here</div>
+                            <div class="drop-zone__subtext">or click to browse (max 50MB)</div>
+                            <input type="file" id="fileInput" accept=".pdf" multiple style="display:none;">
+                        </div>
+                        <div class="upload-progress" id="uploadProgress" style="display:none;">
+                            <div class="progress-track">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <div class="progress-text" id="progressText">Uploading...</div>
+                        </div>
+                    </div>
+
+                    <!-- URL Scraper -->
+                    <div class="upload-card">
+                        <div class="upload-card__header">
+                            <span class="upload-card__icon">🌐</span>
+                            <h3 class="upload-card__title">Scan Website</h3>
+                        </div>
+                        <p class="upload-card__desc">Enter your website URL — the agent will crawl and learn from all
+                            pages</p>
+                        <div class="url-input-group">
+                            <input type="url" class="url-input" id="urlInput" placeholder="https://yourcompany.com" />
+                            <button class="btn btn--accent" id="scanUrlBtn">
+                                <span class="btn-text">🔍 Scan Website</span>
+                                <span class="spinner"></span>
+                            </button>
+                        </div>
+                        <div class="url-options">
+                            <label class="url-option">
+                                <span>Max Depth:</span>
+                                <select id="maxDepth">
+                                    <option value="1">1 level</option>
+                                    <option value="2">2 levels</option>
+                                    <option value="3" selected>3 levels</option>
+                                    <option value="5">5 levels</option>
+                                </select>
+                            </label>
+                            <label class="url-option">
+                                <span>Max Pages:</span>
+                                <select id="maxPages">
+                                    <option value="10">10 pages</option>
+                                    <option value="25">25 pages</option>
+                                    <option value="50" selected>50 pages</option>
+                                    <option value="100">100 pages</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── Search Section ─── -->
+                <div class="kb-search-section">
+                    <div class="search-bar">
+                        <input type="text" class="search-input" id="searchInput"
+                            placeholder="🔎 Test knowledge retrieval — ask a question..." />
+                        <button class="btn btn--ghost" id="searchBtn">Search</button>
+                    </div>
+                    <div class="search-results" id="searchResults" style="display:none;"></div>
+                </div>
+
+                <!-- ─── Documents Table ─── -->
+                <div class="kb-documents">
+                    <div class="docs-header">
+                        <h2 class="docs-header__title">Knowledge Documents</h2>
+                        <div class="docs-header__filters">
+                            <select class="filter-select" id="filterStatus">
+                                <option value="">All Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                                <option value="ready">Ready</option>
+                                <option value="failed">Failed</option>
+                            </select>
+                            <select class="filter-select" id="filterType">
+                                <option value="">All Types</option>
+                                <option value="pdf">PDF</option>
+                                <option value="url">URL</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="docs-table-wrapper">
+                        <table class="docs-table" id="docsTable">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Name / URL</th>
+                                    <th>Status</th>
+                                    <th>Chunks</th>
+                                    <th>Uploaded</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="docsTableBody">
+                                <tr>
+                                    <td colspan="6" class="empty-cell">Loading documents...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Chunk Viewer Modal -->
+    <div class="modal-overlay" id="chunkModal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Document Chunks</h3>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Chunks will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast container -->
+    <div class="toast-container" id="toastContainer"></div>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top-btn" id="scrollTopBtn" title="Back to top">↑</button>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/knowledge.js"></script>
+</body>
+
+</html>
